@@ -1,58 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rishab Kumar</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #212529;
-            color: #ffffff;
-        }
-        a {
-            color: #ffffff;
-        }
-        .social-icon {
-            font-size: 2em;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-    </style>
+  <title>Fingerprint Login</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="typing">
-            <h1 id="demo"class="mb-5"></h1>
-        </div>
-        <div class="d-flex justify-content-center">
-            <a href="https://github.com/rishabkumar7" class="mx-2" target="_blank"><i class="fab fa-github social-icon"></i></a>
-            <a href="https://twitter.com/rishabk7" class="mx-2" target="_blank"><i class="fab fa-twitter social-icon"></i></a>
-            <a href="https://instagram.com/rishabincloud" class="mx-2" target="_blank"><i class="fab fa-instagram social-icon"></i></a>
-            <a href="https://linkedin.com/in/rishabkumar7" class="mx-2" target="_blank"><i class="fab fa-linkedin-in social-icon"></i></a>
-        </div>
-    </div>
-    <script>
-    var i = 0;
-    var txt = 'Rishab Kumar'; /* The text */
-    var speed = 100; /* The speed/duration of the effect in milliseconds */
+<script>
     
-    function typeWriter() {
-        if (i < txt.length) {
-            document.getElementById("demo").innerHTML += txt.charAt(i);
-            i++;
-        setTimeout(typeWriter, speed);
-            }
-        }
-    typeWriter();
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    
+    
+</script>
+<body>
+  <div class="container">
+    <h1>Fingerprint Login</h1>
+    <button id="loginButton">Login with Fingerprint</button>
+    <p id="message"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3"></script>
+  <script>
+      
+      // Import the FingerprintJS library
+import { FingerprintJS } from '@fingerprintjs/fingerprintjs';
+
+// Check if the browser supports the necessary APIs
+if (window.PublicKeyCredential && window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable) {
+  const loginButton = document.getElementById('loginButton');
+  const message = document.getElementById('message');
+
+  // Add event listener to the login button
+  loginButton.addEventListener('click', async () => {
+    try {
+      // Create a new FingerprintJS client
+      const fp = await FingerprintJS.load();
+
+      // Retrieve the visitor's fingerprint
+      const fingerprint = await fp.get();
+
+      // Use the fingerprint information for authentication
+      if (fingerprint) {
+        // Fingerprint authentication successful
+        message.textContent = 'Fingerprint authentication successful!';
+        // You can now proceed to grant access to the website's content
+        // For example, redirect to a different page or display the content dynamically
+      } else {
+        // Fingerprint authentication failed
+        message.textContent = 'Fingerprint authentication failed.';
+      }
+    } catch (error) {
+      // Fingerprint authentication not supported or an error occurred
+      message.textContent = 'Fingerprint authentication not supported or an error occurred.';
+      console.error(error);
+    }
+  });
+} else {
+  // Fingerprint authentication not supported
+  const message = document.getElementById('message');
+  message.textContent = 'Fingerprint authentication is not supported on this device.';
+}
+      
+  </script>
 </body>
 </html>
