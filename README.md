@@ -1,5 +1,1 @@
-Deploy Infrastructure to GCP with Terraform. I deployed a static website to GCP using Terraform. This is the GitHub repo containing the code both for the static website and Terraform as Infrastructure as Code.
-
-## Code
-
-The Terraform code is available in the same directory as that of other files. 
+This project demonstrates the deployment of a static website to Google Cloud Platform (GCP) using Terraform, an Infrastructure-as-Code (IaC) tool. The Terraform configuration files (.tf) define the GCP resources required to host the static website, including Compute Engine instances, Storage Buckets, and Cloud DNS records. The Terraform code is stored in the same directory as the static website files, enabling a unified repository for both the application code and infrastructure configuration. By utilizing Terraform, the project automates the provisioning and management of GCP resources, streamlining the deployment process and minimizing manual errors. The GitHub repository contains the Terraform code, which can be executed using the Terraform CLI, to create and manage the GCP infrastructure for the static website. This approach enables version control, reusability, and collaboration on infrastructure configurations, aligning with DevOps best practices.
